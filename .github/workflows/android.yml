@@ -1,0 +1,41 @@
+name: Android CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up JDK
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Set up Android SDK
+      uses: android-actions/setup-android@v3
+
+    - name: Build with Gradle
+      working-directory: ./android
+      run: ./gradlew build
+
+    - name: Run tests
+      working-directory: ./android
+      run: ./gradlew test
+
+    - name: Build APK
+      working-directory: ./android
+      run: ./gradlew assembleDebug
+
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: bot2u-debug.apk
+        path: android/app/build/outputs/apk/debug/
