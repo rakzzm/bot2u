@@ -1,10 +1,13 @@
 package com.bot2u.app.ui
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 /**
  * UI State for the Login screen
@@ -34,14 +37,16 @@ class LoginViewModel : ViewModel() {
         // Simulate login - replace with actual authentication logic
         // For demo purposes, accept any non-empty credentials
         if (email.isNotBlank() && password.isNotBlank()) {
-            // Simulate network delay
-            kotlinx.coroutines.delay(1500)
-            _uiState.update {
-                it.copy(
-                    isLoading = false,
-                    isLoggedIn = true,
-                    email = email
-                )
+            viewModelScope.launch {
+                // Simulate network delay
+                delay(1500)
+                _uiState.update {
+                    it.copy(
+                        isLoading = false,
+                        isLoggedIn = true,
+                        email = email
+                    )
+                }
             }
         } else {
             _uiState.update {
