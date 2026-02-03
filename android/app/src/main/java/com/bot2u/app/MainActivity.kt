@@ -7,11 +7,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.bot2u.app.ui.TTSScreen
+import com.bot2u.app.ui.Bot2uNavigation
 import com.bot2u.app.ui.theme.Bot2uTheme
 
 /**
- * Main activity for the Chatterbox TTS Android app
+ * Main activity for the bot2u Android app
  */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    TTSScreen()
+                    Bot2uNavigation()
                 }
             }
         }
